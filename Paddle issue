@@ -1,0 +1,55 @@
+import pygame
+pygame.init
+
+screen = pygame.display.set_mode((700, 500))
+pygame.display.set_caption("Break")
+
+doExit = False
+
+clock = pygame.time.Clock()
+
+#variable
+p1x = 300
+p1y = 400
+
+bx = 350 
+by = 250
+
+bVx = 5
+bVy = 5
+while not doExit:
+
+    clock.tick(60)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            doExit = True
+
+    #game logic
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        p1x-=10
+    if keys[pygame.K_RIGHT]:
+        p1x+=10
+
+    #Game logic
+    bx += bVx
+    by += bVy
+
+    #bounce top and bottom
+    if by <= 0 or by + 20 >= 500:
+        bVy *= -1
+    
+    if bx <= 0 or bx + 20 >= 700:
+        bVx *= -1
+    #paddle collision
+    if bx+10 > p1x and bx-10<p1x+100 and by+10 > p1y:
+        bVx *= -1
+
+    #render
+    screen.fill((0,0,0)) 
+    pygame.draw.rect(screen, (255, 255, 255), (p1x, p1y, 100, 20), 1)
+    pygame.draw.circle(screen, (255, 255, 255), (bx, by), 15)
+    pygame.display.flip()           
+#end game
+pygame.quit()
