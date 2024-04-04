@@ -14,7 +14,7 @@ p1x = 300
 p1y = 400
 
 bx = 350 
-by = 250
+by = 300
 
 bVx = 5
 bVy = 5
@@ -31,12 +31,12 @@ class brick:
         if not self.isDead:
             pygame.draw.rect(screen, self.color, (self.xpos, self.ypos, 100, 50))
 
-    def collide(self, ball_x, ball_y):
+    def collide(self, bx, by):
         if not self.isDead:
-            if (ball_x + 15 > self.xpos and
-                ball_x < self.xpos + 100 and
-                ball_y + 15 > self.ypos and
-                ball_y < self.xpos + 50):
+            if (bx + 15 > self.xpos and
+                bx < self.xpos + 100 and
+                by + 15 > self.ypos and
+                by < self.xpos + 50):
                 self.isDead = True
                 return True
         return False
@@ -51,6 +51,7 @@ orange = brick(440, 120)
 pear = brick(440, 50)
 Eevee = brick(570, 50)
 Flareon = brick(570, 120)
+
 #game loop
 while not doExit:
 
@@ -83,26 +84,65 @@ while not doExit:
         bVy  *= -1
 
     #bhrick collision
-if Bob.collide(bx, by):
-    bVy *= -1
-elif James.collide(bx, by):
-    bVy *= -1
-elif Samuel.collide(bx, by):
-    bVy *= -1
-elif Jackson.collide(bx, by):
-    bVy *= -1
-elif Potato.collide(bx, by):
-    bVy *= -1
-elif Apple.collide(bx, by):
-    bVy *= -1
-elif orange.collide(bx, by):
-    bVy *= -1
-elif pear.collide(bx, by):
-    bVy *= -1
-elif Eevee.collide(bx, by):
-    bVy *= -1
-elif Flareon.collide(bx, by):
-    bVy *= -1
+    if Bob.collide(bx, by):
+        bVy *= -1
+
+    if Bob.isDead == True:
+        Bob.collide(bx, by) == False
+
+    if Samuel.collide(bx, by):
+        bVy *= -1
+
+    if Samuel.isDead == True:
+        Samuel.collide(bx, by) == False
+
+    if James.collide(bx, by):
+        bVy *= -1
+
+    if James.isDead == True:
+        Bob.collide(bx, by) == False
+        
+    if Jackson.collide(bx, by):
+        bVy *= -1
+
+    if Jackson.isDead == True:
+        Jackson.collide(bx, by) == False
+
+    if Potato.collide(bx, by):
+        bVy *= -1
+    
+    if Potato.isDead == True:
+        Potato.collide(bx, by) == False
+
+    if Apple.collide(bx, by):
+        bVy *= -1
+
+    if Apple.isDead == True:
+        Apple.collide(bx, by) == False
+
+    if orange.collide(bx, by):
+        bVy *= -1
+
+    if orange.isDead == True:
+        orange.collide(bx, by) == False
+
+    if pear.collide(bx, by):
+        bVy *= -1
+    
+    if pear.isDead == True:
+        pear.collide(bx, by) == False
+
+    if Eevee.collide(bx, by):
+        bVy *= -1
+    
+    if Eevee.isDead == True:
+        Eevee.collide(bx, by) == False
+
+    if Flareon.collide(bx, by):
+        bVy *= -1
+
+    if Flareon.isDead == True:
+        Flareon.collide(bx, by) == False
 
     #render
     screen.fill((0,0,0)) 
@@ -118,7 +158,36 @@ elif Flareon.collide(bx, by):
     pear.draw()
     Eevee.draw()
     Flareon.draw()
-    pygame.display.flip()
 
+    if Bob.isDead == (False):
+        Bob.draw()
+    
+    if Samuel.isDead == (False):
+        Samuel.draw()
+    
+    if James.isDead == (False):
+        James.draw()
+
+    if Jackson.isDead == (False):
+        Jackson.draw()
+
+    if Potato.isDead == (False):
+        Potato.draw()
+
+    if Apple.isDead == (False):
+        Apple.draw()
+
+    if orange.isDead == (False):
+        orange.draw()
+
+    if pear.isDead == (False):
+        pear.draw()
+
+    if Eevee.isDead == (False):
+        Eevee.draw()
+
+    if Flareon.isDead == (False):
+        Flareon.draw()
+    pygame.display.flip()
 #end game
 pygame.quit()
